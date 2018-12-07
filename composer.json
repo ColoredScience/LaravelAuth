@@ -1,5 +1,5 @@
 {
-    "name": "socialiteproviders/coloredscience",
+    "name": "coloredscience/auth",
     "description": "Colored ScienceProvider for Laravel Socialite",
     "license": "MIT",
     "authors": [{
