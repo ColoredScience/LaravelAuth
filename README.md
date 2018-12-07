@@ -22,13 +22,11 @@ Configuration
 * Add a configurable service for Laravel Socialite connection:
 
     ```
-    ...
         'coloredsci' => [
             'client_id' => env('CS_CLIENT_ID'),
             'client_secret' => env('CS_CLIENT_SECRET'),
             'redirect' => env('APP_URL').env('CS_REDIRECT'),
         ],
-    ...
     ```
 
 * Remove `Laravel\Socialite\SocialiteServiceProvider` from your `providers[]` array in `config\app.php` if you have added it already.
@@ -36,13 +34,11 @@ Configuration
 * Register this provider instead
 
     ```
-    ...
         'providers' => [
             // a whole bunch of providers
             // remove 'Laravel\Socialite\SocialiteServiceProvider',
             \SocialiteProviders\Manager\ServiceProvider::class, // add
         ];
-    ...
     ```
 
 * Add `SocialiteProviders\Manager\SocialiteWasCalled` event to your `listen[]` array in `app/Providers/EventServiceProvider`
@@ -50,34 +46,40 @@ Configuration
 * Add the Colored Science listener to the `SocialiteProviders\Manager\SocialiteWasCalled[]` that you just created
 
     ```
-    ...
         protected $listen = [
             \SocialiteProviders\Manager\SocialiteWasCalled::class => [
                 'ColoredScience\\LaravelAuth\\ColoredScienceExtendSocialite@handle',
             ],
         ];
-    ...
     ```
 
 * Create your Authentication Controller to manage the authentication flow
     ```
-    ...
         php artisan make:controller Auth\\CSAuthController
-    ...
     ```
 
-* Create a login function to initialize CS Socialite, more usage options are available via [Laravel Socialite ](https://laravel.com/docs/5.7/socialite)
+* Register your Auth Routes
     ```
-    ...
+    Route::get('/login', 'Auth\CSAuthController@login' )->name( 'login' );
+    Route::get('/callback', 'Auth\CSAuthController@handleCallback' )->name( 'callback' );
+    Route::get('/logout', 'Auth\CSAuthController@logout' )->name( 'logout' )->middleware('auth');
+    ```
+
+* Create a login and logout function to handle the CS Socialite authentication and logout, more usage options are available via [Laravel Socialite ](https://laravel.com/docs/5.7/socialite)
+    ```
         public function login()
         {
             return Socialite::with('coloredsci')->redirect();
         }
-    ...
+
+        public function logout()
+        {
+            \Auth::logout();
+            return  \Redirect::intended('/');
+        }
     ```
 * Create a callback function to handle the redirect callback, more usage options are available via [Laravel Socialite ](https://laravel.com/docs/5.7/socialite)
     ```
-    ...
         public function handleCallback()
         {
             $user = Socialite::driver('coloredsci')->user();
@@ -102,7 +104,6 @@ Configuration
                 ]
             );
         }
-    ...
     ```
 
 ## Reference
