@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\ColoredScience;
+namespace ColoredScience\SocialiteProvider;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
