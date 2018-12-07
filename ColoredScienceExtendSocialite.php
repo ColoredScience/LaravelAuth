@@ -1,6 +1,6 @@
 <?php
 
-namespace ColoredScience\SocialiteProvider;
+namespace ColoredScience\LaravelAuth;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
