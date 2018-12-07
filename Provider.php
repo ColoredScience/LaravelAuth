@@ -1,5 +1,5 @@
 <?php
-namespace ColoredScience\Auth;
+namespace ColoredScience\LaravelAuth;
 use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\ProviderInterface;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
