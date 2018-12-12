@@ -38,7 +38,7 @@ class Provider extends AbstractProvider implements ProviderInterface
      */
     protected function getUserByToken($token)
     {
-        $userUrl = 'http://user.coloredscience.com/api/user';
+        $userUrl = 'https://user.coloredscience.com/api/user';
 
         $response = $this->getHttpClient()->get($userUrl, [
             'headers' => [
@@ -110,7 +110,7 @@ class Provider extends AbstractProvider implements ProviderInterface
 
     protected function getOrgsByToken($token)
     {
-        $orgsUrl = 'http://user.coloredscience.com/api/user/orgs';
+        $orgsUrl = 'https://user.coloredscience.com/api/user/orgs';
 
         $response = $this->getHttpClient()->get($orgsUrl, [
             'headers' => [
