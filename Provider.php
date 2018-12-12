@@ -62,6 +62,34 @@ class Provider extends AbstractProvider implements ProviderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getUserByToken($token)
+    {
+        $userUrl = 'http://user.coloredscience.com/api/user';
+
+        $response = $this->getHttpClient()->get($userUrl, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+
+        return json_decode($response->getBody(), true);
+
+        // $userUrl = 'https://api.bitbucket.org/2.0/user?access_token='.$token;
+
+        // $response = $this->getHttpClient()->get($userUrl);
+
+        // $user = json_decode($response->getBody(), true);
+
+        // if (in_array('email', $this->scopes)) {
+        //     $user['email'] = $this->getEmailByToken($token);
+        // }
+
+        // return $user;
+    }
+
+    /**
      * Get the email for the given access token.
      *
      * @param  string  $token
@@ -106,6 +134,36 @@ class Provider extends AbstractProvider implements ProviderInterface
         //     'name' => Arr::get($user, 'display_name'), 'email' => Arr::get($user, 'email'),
         //     'avatar' => Arr::get($user, 'links.avatar.href'),
         // ]);
+    }
+
+    protected function getOrgsByToken($token)
+    {
+        $orgsUrl = 'http://user.coloredscience.com/api/user/orgs';
+
+        $response = $this->getHttpClient()->get($orgsUrl, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+
+        return json_decode($response->getBody(), true);
+    }
+
+    public function orgs()
+    {
+        if ($this->hasInvalidState()) {
+            throw new InvalidStateException;
+        }
+
+        $response = $this->getAccessTokenResponse($this->getCode());
+
+        return $orgs = $this->getOrgsByToken(
+            $token = Arr::get($response, 'access_token')
+        );
+
+        // return $user->setToken($token)
+        //             ->setRefreshToken(Arr::get($response, 'refresh_token'))
+        //             ->setExpiresIn(Arr::get($response, 'expires_in'));
     }
 
     /**
