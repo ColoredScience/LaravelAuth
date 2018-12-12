@@ -1,5 +1,6 @@
 <?php
 namespace ColoredScience\LaravelAuth;
+use Laravel\Socialite\Two\InvalidStateException;
 use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\ProviderInterface;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
