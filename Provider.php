@@ -62,34 +62,6 @@ class Provider extends AbstractProvider implements ProviderInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function getUserByToken($token)
-    {
-        $userUrl = 'http://user.coloredscience.com/api/user';
-
-        $response = $this->getHttpClient()->get($userUrl, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-            ],
-        ]);
-
-        return json_decode($response->getBody(), true);
-
-        // $userUrl = 'https://api.bitbucket.org/2.0/user?access_token='.$token;
-
-        // $response = $this->getHttpClient()->get($userUrl);
-
-        // $user = json_decode($response->getBody(), true);
-
-        // if (in_array('email', $this->scopes)) {
-        //     $user['email'] = $this->getEmailByToken($token);
-        // }
-
-        // return $user;
-    }
-
-    /**
      * Get the email for the given access token.
      *
      * @param  string  $token
