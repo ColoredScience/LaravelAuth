@@ -19,7 +19,7 @@ Create your app on [Colored User](https://user.coloredscience.com/devs) to obtai
 Configuration
 ------------
 
-* Add a configurable service for Laravel Socialite connection:
+* Add a configurable service in `config\services.php` for Laravel Socialite connection:
 
     ```
         'coloredsci' => [
