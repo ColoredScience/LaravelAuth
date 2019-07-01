@@ -116,10 +116,6 @@ class Provider extends AbstractProvider implements ProviderInterface
         return $orgs = $this->getOrgsByToken(
             $token = Arr::get($response, 'access_token')
         );
-
-        // return $user->setToken($token)
-        //             ->setRefreshToken(Arr::get($response, 'refresh_token'))
-        //             ->setExpiresIn(Arr::get($response, 'expires_in'));
     }
 
     /**
@@ -144,12 +140,6 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    // protected function getTokenFields($code)
-    // {
-    //     return array_merge(parent::getTokenFields($code), [
-    //         'grant_type' => 'authorization_code',
-    //     ]);
-    // }
 
     protected function getTokenFields($code)
     {
@@ -160,6 +150,5 @@ class Provider extends AbstractProvider implements ProviderInterface
             'code' => $code,
             'redirect_uri' => $this->redirectUrl,
         ];
-        // return parent::getTokenFields($code) + ['grant_type' => 'authorization_code'];
     }
 }
