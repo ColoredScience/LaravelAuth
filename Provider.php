@@ -48,18 +48,6 @@ class Provider extends AbstractProvider implements ProviderInterface
         ]);
 
         return json_decode($response->getBody(), true);
-
-        // $userUrl = 'https://api.bitbucket.org/2.0/user?access_token='.$token;
-
-        // $response = $this->getHttpClient()->get($userUrl);
-
-        // $user = json_decode($response->getBody(), true);
-
-        // if (in_array('email', $this->scopes)) {
-        //     $user['email'] = $this->getEmailByToken($token);
-        // }
-
-        // return $user;
     }
 
     /**
@@ -102,11 +90,6 @@ class Provider extends AbstractProvider implements ProviderInterface
             'phone'     => $user['phone'],
             'email_verified_at'     => $user['email_verified_at'],
         ]);
-        // return (new User)->setRaw($user)->map([
-        //     'id' => $user['uuid'], 'nickname' => $user['username'],
-        //     'name' => Arr::get($user, 'display_name'), 'email' => Arr::get($user, 'email'),
-        //     'avatar' => Arr::get($user, 'links.avatar.href'),
-        // ]);
     }
 
     protected function getOrgsByToken($token)
